@@ -50,14 +50,18 @@ import { db } from '@/firebase/firebase';
     console.log(mainStore.user,'why')
     const getRequest = await getCollection('requests')
      getRequest.forEach((object:Array<object>)=>{
-         requestList.value.push({coachId:object.coachId});
+         requestList.value.push({coachId:object.coachId,userId:object.id});
     })
    const coachesData = await getCollection('users'); // Fetch coaches data from Firebase
    coaches.value = coachesData.filter(coach => coach.role === 'coach');
   });
   
   const showResult = (id: string) => {
-  const isSent = requestList.value.some((object) => object.coachId === id);
+  
+    const isSent = requestList.value.some((object) => {
+      console.log(object.userId === mainStore.user.uid,mainStore.user.uid,object.userId)
+      return object.userId === mainStore.user.uid
+    });
   return isSent ? 'Sent' : 'Select';
 };
   // Function to select a coach

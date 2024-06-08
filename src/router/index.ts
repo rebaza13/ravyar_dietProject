@@ -1,5 +1,5 @@
 import { createRouter , createWebHistory,RouteRecordRaw } from "vue-router";
-
+import { useMainStore } from "@/stores/MainStore";
 const Home : Array<RouteRecordRaw> =[
     {
         path: "profile",
@@ -37,7 +37,8 @@ const routes :Array<RouteRecordRaw> = [
         path: "/",
         name: "home",
         component: ()=>import("@/views/home/Home.vue"),
-        children:Home
+        children:Home,
+        
     },
     {
         path: "/login",

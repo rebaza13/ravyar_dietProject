@@ -14,7 +14,7 @@
   
             <!-- Links -->
             <div class="hidden md:block">
-              <div class="flex items-center">
+              <div v-if="mainStore.user" class="flex items-center">
                 <RouterLink v-if="mainStore.user.role ==='user'" :to="{name: 'request'}" class="px-3 py-2 text-sm font-medium text-white hover:bg-primary">Request</RouterLink>
                 <RouterLink  :to="{name: 'profile'}" class="px-3 py-2 text-sm font-medium text-white hover:bg-primary">Profile</RouterLink>
                 <RouterLink v-if="mainStore.user.role ==='coach'"  :to="{name: 'response'}" class="px-3 py-2 text-sm font-medium text-white hover:bg-primary">Response</RouterLink>
@@ -46,6 +46,7 @@
 import { useRoute,useRouter,RouterView,RouterLink } from 'vue-router';
 import { getAuth, signOut } from "firebase/auth";
 import { useMainStore } from '@/stores/MainStore';
+import { watch } from 'vue';
   const route = useRoute()
   const router = useRouter()
   const mainStore = useMainStore()
@@ -53,11 +54,19 @@ import { useMainStore } from '@/stores/MainStore';
 
 const auth = getAuth();
 signOut(auth).then(() => {
+  window.localStorage.removeItem("#user")
   router.replace({name:'login'})
+
 }).catch((error) => {
   // An error happened.
 });
   }
+
+  watch(()=>route,()=>{
+    if(mainStore.user== null){
+      router.push({name:'login'})
+    }
+  },{immediate:true})
   </script>
   
   <style>
