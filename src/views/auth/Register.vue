@@ -43,14 +43,14 @@
           const userCredential = await registerUser(email.value, password.value);
           await addUserToFirestore(userCredential.uid, { email: email.value,id: userCredential.uid,name:name.value,role:'user'});
 
-          let selectedRole 
-     const collectUser = await getCollection('users')
-     collectUser.forEach((object:any)=>{
-      if(object.id === userCredential.uid ){
-        selectedRole =object.role
-      }})
+      
+    //  const collectUser = await getCollection('users')
+    // //  collectUser.forEach((object:any)=>{
+    // //   if(object.id === userCredential.uid ){
+    // //     selectedRole =object.role
+    // //   }})
           mainStore.user = {
-            role: selectedRole,
+            role: "user",
         name:userCredential.displayName,
         email:userCredential.email,
         photo:userCredential.photoURL,
