@@ -6,7 +6,7 @@
         <h2 class="text-2xl font-bold text-primary-dark mb-4">Register a Coach</h2>
         <form @submit.prevent="register">
             <div class="mb-4">
-            <label for="full name" class="block text-sm font-medium text-gray-700">Your full name</label>
+            <label for="full name" class="block text-sm font-medium text-gray-700">coach full name</label>
             <input id="name" type="text" v-model="name" class="mt-1 block w-full rounded-md border-gray-300  border-2 shadow-sm  focus:ring focus:ring-primary-light focus:ring-opacity-50">
           </div>
           <div class="mb-4">
