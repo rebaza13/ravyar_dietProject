@@ -18,7 +18,7 @@
             <td class="px-6 py-4 whitespace-nowrap">{{ user.gender }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ user.role }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <button @click="removeUser(user.id)" class="text-sm font-medium text-red-600 hover:text-red-900">Remove</button>
+              <button @click="removeUser(user.documentId)" class="text-sm font-medium text-red-600 hover:text-red-900">Remove</button>
             </td>
           </tr>
         </tbody>
@@ -40,8 +40,10 @@
   
   // Function to remove a user
   const removeUser = async (userId) => {
+    console.log(userId)
     // Call the removeUser method from Firebase methods
-    await deleteDocument(userId);
+    await deleteDocument('users',userId)
+  //  await deleteDocument(userId);
     // Remove the user from the local array
     users.value = users.value.filter(user => user.id !== userId);
   };
